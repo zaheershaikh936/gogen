@@ -11,7 +11,23 @@ Gogen is a powerful CLI tool designed to rapid-prototype Go web applications usi
 
 ## Installation
 
-To build the tool locally:
+### For Developers (Standard Go Install)
+
+The easiest way to install `gogen` is using the `go install` command:
+
+```bash
+go install github.com/zaheershaikh936/gogen@latest
+```
+
+Make sure your `$GOPATH/bin` is in your system `PATH`.
+
+### For Users (Pre-compiled Binaries)
+
+You can download the latest pre-compiled binaries for your operating system from the [Releases](https://github.com/zaheershaikh936/gogen/releases) page.
+
+### Local Build (Development)
+
+To build and run the tool locally:
 
 ```bash
 go build -o gogen
