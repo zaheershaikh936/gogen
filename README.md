@@ -1,95 +1,126 @@
-# Gogen
+# 🚀 Gogen - Go CRUD Generator CLI
 
-Gogen is a powerful CLI tool designed to rapid-prototype Go web applications using the [Fiber](https://gofiber.io/) framework. It automates the generation of standard CRUD boilerplate, following a clean architecture (Controllers, Services, Repositories, Routes).
+[![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/zaheershaikh936/gogen)](https://github.com/zaheershaikh936/gogen/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
 
-## Features
+> A powerful CLI tool to generate complete CRUD resources for Go Fiber framework in seconds ⚡
 
-- **CRUD Resource Generation**: Generates complete vertical slices (Route -> Controller -> Service -> Repository) in one command.
-- **Smart Pluralization**: Automatically handles resource naming. Inputting `user` or `users` correctly generates a `users` resource. Handles irregular plurals (e.g., `category` -> `categories`, `box` -> `boxes`).
-- **Dynamic Module Detection**: Automatically reads your `go.mod` file to generate correct internal import paths. No hardcoded module names!
-- **Fiber-Ready**: Generates code pre-configured for use with the Gofiber v2 framework.
+Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD APIs with models, controllers, services, repositories, and routes—all in one command.
 
-## 🚀 Installation
+## ✨ Features
 
-### Option 1: Go Install (Recommended)
-If you have Go installed on your system, this is the quickest way to get started:
+- 🎯 **One Command Generation** - Generate complete CRUD structure instantly
+- 📁 **Clean Architecture** - Follows best practices with separated concerns
+- 🔥 **Fiber Framework** - Built specifically for Go Fiber
+- ⚡ **Lightning Fast** - Generate resources in milliseconds
+- 🛠️ **Customizable** - Flexible output directory configuration
+- 📦 **Zero Dependencies** - Simple installation, no complex setup
+
+## 🎬 Demo
+```bash
+$ gogen resource User
+
+🚀 Generating CRUD resource...
+Model: User
+
+Files to be generated:
+  ✓ ./users/controllers/user_controller.go
+  ✓ ./users/services/user_service.go
+  ✓ ./users/repositories/user_repository.go
+  ✓ ./users/routes/user_routes.go
+
+✅ Done!
+```
+
+## � Installation
+
+### Using Go Install (Recommended)
 ```bash
 go install github.com/zaheershaikh936/gogen@latest
 ```
-*Note: Ensure your `$GOPATH/bin` is in your system `PATH`.*
 
-### Option 2: Pre-compiled Binaries
-Download the latest binary for your OS from the [Releases](https://github.com/zaheershaikh936/gogen/releases) page.
+### Download Binary
+Download the latest release for your OS from [Releases](https://github.com/zaheershaikh936/gogen/releases/latest)
 
-**macOS/Linux:**
+**Linux:**
 ```bash
-chmod +x gogen
-sudo mv gogen /usr/local/bin/
+wget https://github.com/zaheershaikh936/gogen/releases/latest/download/gogen_Linux_x86_64.tar.gz
+# Extract and move to bin
+```
+
+**macOS:**
+```bash
+curl -L https://github.com/zaheershaikh936/gogen/releases/latest/download/gogen_Darwin_arm64.tar.gz -o gogen.tar.gz
+# Extract and move to bin
 ```
 
 **Windows:**
-Download the `.zip` file, extract `gogen.exe`, and add it to your system Environment Variables.
+Download `gogen_Windows_x86_64.zip` from releases and add to your PATH.
+
+## 🚀 Quick Start
+
+### Generate a CRUD Resource
+```bash
+# Basic usage
+gogen resource user
+
+# Custom output directory
+gogen resource product --output ./api
+
+# Short flag
+gogen resource order -o ./src
+```
+
+### What Gets Generated?
+```
+users/
+├── controllers/
+│   └── users_controller.go   # HTTP handlers (GetAll, Get, Create, Update, Delete)
+├── services/
+│   └── users_service.go      # Business logic layer
+├── repositories/
+│   └── users_repository.go   # Database operations
+└── routes/
+    └── users_routes.go       # Fiber route definitions
+```
+
+## 🏗️ Project Structure
+
+Gogen follows clean architecture principles:
+```
+your-project/
+├── controllers/   # HTTP handlers (presentation layer)
+├── services/      # Business logic
+├── repositories/  # Data access layer
+└── routes/        # API route definitions
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌟 Show Your Support
+
+If you find this project useful, please give it a ⭐️ on GitHub!
+
+## 📬 Contact
+
+**Zaheer Shaikh** - [@zaheershaikh936](https://github.com/zaheershaikh936)
+
+Project Link: [https://github.com/zaheershaikh936/gogen](https://github.com/zaheershaikh936/gogen)
 
 ---
 
-## ⚡ Quick Start
-
-1. **Initialize a new Fiber project:**
-   ```bash
-   mkdir my-api && cd my-api
-   go mod init my-api
-   go get github.com/gofiber/fiber/v2
-   ```
-
-2. **Generate your first resource:**
-   ```bash
-   gogen resource user --output ./internal/api
-   ```
-
----
-
-## 🛠 Usage
-
-The `resource` command generates a complete vertical slice (Route -> Controller -> Service -> Repository).
-
-```bash
-gogen resource [model_name] --output [path]
-```
-
-### Examples
-
-**Standard Resource:**
-```bash
-gogen resource product --output ./src/api
-```
-
-**Irregular Pluralization:**
-Gogen handles complex naming for you. For example, `category` becomes `categories`:
-```bash
-gogen resource category --output ./src/api
-```
-
-### Generated Structure
-```text
-src/api/
-└── products/
-    ├── controllers/
-    │   └── products_controller.go
-    ├── repositories/
-    │   └── products_repository.go
-    ├── routes/
-    │   └── products_routes.go
-    └── services/
-        └── products_service.go
-```
-
-## 🏗 Generated Code Layers
-
-- **Routes**: Fiber router groups mapping HTTP methods to controller functions.
-- **Controllers**: Request parsing and input validation.
-- **Services**: Business logic and orchestration.
-- **Repositories**: Data access layer (with Fiber context placeholders).
-
-## 📄 License
-
-[MIT](LICENSE)
+**Made with ❤️ by Zaheer Shaikh**
