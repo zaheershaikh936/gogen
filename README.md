@@ -9,65 +9,87 @@ Gogen is a powerful CLI tool designed to rapid-prototype Go web applications usi
 - **Dynamic Module Detection**: Automatically reads your `go.mod` file to generate correct internal import paths. No hardcoded module names!
 - **Fiber-Ready**: Generates code pre-configured for use with the Gofiber v2 framework.
 
-## Installation
+## 🚀 Installation
 
-### For Developers (Standard Go Install)
-
-The easiest way to install `gogen` is using the `go install` command:
-
+### Option 1: Go Install (Recommended)
+If you have Go installed on your system, this is the quickest way to get started:
 ```bash
 go install github.com/zaheershaikh936/gogen@latest
 ```
+*Note: Ensure your `$GOPATH/bin` is in your system `PATH`.*
 
-Make sure your `$GOPATH/bin` is in your system `PATH`.
+### Option 2: Pre-compiled Binaries
+Download the latest binary for your OS from the [Releases](https://github.com/zaheershaikh936/gogen/releases) page.
 
-### For Users (Pre-compiled Binaries)
-
-You can download the latest pre-compiled binaries for your operating system from the [Releases](https://github.com/zaheershaikh936/gogen/releases) page.
-
-### Local Build (Development)
-
-To build and run the tool locally:
-
+**macOS/Linux:**
 ```bash
-go build -o gogen
+chmod +x gogen
+sudo mv gogen /usr/local/bin/
 ```
 
-## Usage
+**Windows:**
+Download the `.zip` file, extract `gogen.exe`, and add it to your system Environment Variables.
 
-Generate a new resource (model) with the `resource` command:
+---
+
+## ⚡ Quick Start
+
+1. **Initialize a new Fiber project:**
+   ```bash
+   mkdir my-api && cd my-api
+   go mod init my-api
+   go get github.com/gofiber/fiber/v2
+   ```
+
+2. **Generate your first resource:**
+   ```bash
+   gogen resource user --output ./internal/api
+   ```
+
+---
+
+## 🛠 Usage
+
+The `resource` command generates a complete vertical slice (Route -> Controller -> Service -> Repository).
 
 ```bash
-./gogen resource [model_name] --output [path]
+gogen resource [model_name] --output [path]
 ```
 
-### Example
+### Examples
 
+**Standard Resource:**
 ```bash
-./gogen resource user --output ./src/api
+gogen resource product --output ./src/api
 ```
 
-This command will create the following structure:
+**Irregular Pluralization:**
+Gogen handles complex naming for you. For example, `category` becomes `categories`:
+```bash
+gogen resource category --output ./src/api
+```
+
+### Generated Structure
 ```text
 src/api/
-└── users/
+└── products/
     ├── controllers/
-    │   └── users_controller.go
+    │   └── products_controller.go
     ├── repositories/
-    │   └── users_repository.go
+    │   └── products_repository.go
     ├── routes/
-    │   └── users_routes.go
+    │   └── products_routes.go
     └── services/
-        └── users_service.go
+        └── products_service.go
 ```
 
-## Generated Code Structure
+## 🏗 Generated Code Layers
 
-- **Routes**: Defines the Fiber router groups and maps HTTP methods to controller functions.
-- **Controllers**: Handles request parsing and calls the appropriate service methods.
-- **Services**: Contains business logic and orchestrates data movement between controllers and repositories.
-- **Repositories**: Direct data access layer (currently initialized with Fiber context placeholders).
+- **Routes**: Fiber router groups mapping HTTP methods to controller functions.
+- **Controllers**: Request parsing and input validation.
+- **Services**: Business logic and orchestration.
+- **Repositories**: Data access layer (with Fiber context placeholders).
 
-## License
+## 📄 License
 
 [MIT](LICENSE)
