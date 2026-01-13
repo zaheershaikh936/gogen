@@ -61,6 +61,14 @@ Download `gogen_Windows_x86_64.zip` from releases and add to your PATH.
 
 ## 🚀 Quick Start
 
+# Setup
+### Check where Go installs binaries
+```
+# Add PATH 
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+
 ### Generate a CRUD Resource
 ```bash
 # Basic usage
