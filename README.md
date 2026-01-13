@@ -70,4 +70,4 @@ src/api/
 
 ## License
 
-[MIT](LICENSE) (or your preferred license)
+[MIT](LICENSE)
