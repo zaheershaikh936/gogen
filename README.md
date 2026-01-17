@@ -13,47 +13,150 @@ Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD 
 
 - 🎯 **One Command Generation** - Generate complete CRUD structure instantly
 - 📁 **Clean Architecture** - Follows best practices with separated concerns
-- 🔥 **Fiber Framework** - Built specifically for Go Fiber
-- ⚡ **Lightning Fast** - Generate resources in milliseconds
-- 🛠️ **Customizable** - Flexible output directory configuration
-- 📦 **Zero Dependencies** - Simple installation, no complex setup
 
-## 🎬 Demo
-```bash
-$ gogen resource User
+# gogen
 
-🚀 Generating CRUD resource...
-Model: User
+A command-line tool for generating CRUD resource scaffolding for the Go Fiber web framework. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
 
-Files to be generated:
-  ✓ ./users/controllers/user_controller.go
-  ✓ ./users/services/user_service.go
-  ✓ ./users/repositories/user_repository.go
-  ✓ ./users/routes/user_routes.go
+## Features
 
-✅ Done!
-```
+- Generates complete CRUD resource structure for Go Fiber
+- Produces controller, service, repository, and route files
+- Supports custom output directory
+- Minimal dependencies, fast execution
+- Clean, idiomatic Go code structure
 
-## � Installation
+## Installation
 
-### Using Go Install (Recommended)
+### Using Go
+
 ```bash
 go install github.com/zaheershaikh936/gogen@latest
 ```
 
-### Download Binary
-Download the latest release for your OS from [Releases](https://github.com/zaheershaikh936/gogen/releases/latest)
+Ensure that your `$GOPATH/bin` is in your `PATH`.
 
-**Linux:**
+### Download Prebuilt Binary
+
+1. Visit [Releases](https://github.com/zaheershaikh936/gogen/releases/latest)
+2. Download the binary for your OS (Windows, Linux, macOS)
+3. Add the binary location to your `PATH`
+
+## CLI Usage
+
+### Command Syntax
+
 ```bash
-wget https://github.com/zaheershaikh936/gogen/releases/latest/download/gogen_Linux_x86_64.tar.gz
-# Extract and move to bin
+gogen resource <model> [flags]
 ```
 
-**macOS:**
+### Arguments
+
+- `<model>`: Required. The singular name of the resource to generate (e.g., `user`, `product`). The tool will pluralize as needed for folder and file names.
+
+### Flags
+
+| Flag         | Short | Default | Description                        |
+|--------------|-------|---------|------------------------------------|
+| `--output`   | `-o`  | `./`    | Output directory for generated files |
+| `--help`     | `-h`  |         | Show help for the command          |
+
+### Behavior Notes
+
+- The tool creates a new folder for the resource under the specified output directory.
+- Existing files with the same name will be overwritten.
+- Only one resource can be generated per command invocation.
+
+## Usage Examples
+
+Generate a `user` resource in the current directory:
+
 ```bash
-curl -L https://github.com/zaheershaikh936/gogen/releases/latest/download/gogen_Darwin_arm64.tar.gz -o gogen.tar.gz
-# Extract and move to bin
+gogen resource user
+```
+
+Generate a `product` resource in a custom directory:
+
+```bash
+gogen resource product --output ./api
+```
+
+Use the short flag for output directory:
+
+```bash
+gogen resource order -o ./src
+```
+
+Show help for the resource command:
+
+```bash
+gogen resource --help
+```
+
+## End-to-End Example
+
+Command:
+
+```bash
+gogen resource invoice --output ./internal/api
+```
+
+Generated folder structure:
+
+```
+internal/api/invoice/
+├── controllers/
+│   └── invoice_controller.go
+├── services/
+│   └── invoice_service.go
+├── repositories/
+│   └── invoice_repository.go
+└── routes/
+    └── invoice_routes.go
+```
+
+## Sample CLI Output
+
+```
+🚀 Generating CRUD resource...
+invoice :Model
+
+Files to be generated:
+  ✓ invoice/routes/invoice_routes.go
+  ✓ invoice/controllers/invoice_controller.go
+  ✓ invoice/services/invoice_service.go
+  ✓ invoice/repositories/invoice_repository.go
+```
+
+## Generated Architecture
+
+gogen follows a clean, modular structure:
+
+- `controllers/`: HTTP handlers for CRUD endpoints
+- `services/`: Business logic layer
+- `repositories/`: Data access layer
+- `routes/`: Fiber route definitions
+
+Each resource is self-contained under its own directory, supporting maintainable and testable code organization.
+
+## Contributing
+
+Contributions are welcome. To contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'feat: add new feature'`)
+4. Push to your branch (`git push origin feature/your-feature`)
+5. Open a pull request
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Zaheer Shaikh  
+GitHub: [@zaheershaikh936](https://github.com/zaheershaikh936)
 ```
 
 **Windows:**
