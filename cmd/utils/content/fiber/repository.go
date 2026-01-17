@@ -35,6 +35,8 @@ func Delete%[3]s(c *fiber.Ctx) error {
 
 func RepositoryContent(model string, output string, moduleName string) string {
 	importPath := output
+	// Trim trailing slashes to avoid double slashes in imports
+	importPath = text.TrimTrailingSlash(importPath)
 	if importPath == "./" || importPath == "." || importPath == "" {
 		importPath = moduleName
 	} else {

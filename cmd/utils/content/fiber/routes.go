@@ -23,6 +23,8 @@ func %[3]sRoutes(router fiber.Router) {
 
 func RoutesContent(model string, output string, moduleName string) string {
 	importPath := output
+	// Trim trailing slashes to avoid double slashes in imports
+	importPath = text.TrimTrailingSlash(importPath)
 	if importPath == "./" || importPath == "." || importPath == "" {
 		importPath = moduleName
 	} else {
@@ -33,8 +35,8 @@ func RoutesContent(model string, output string, moduleName string) string {
 			importPath = moduleName + "/" + importPath
 		}
 	}
-	return fmt.Sprintf(routes_content, 
-		importPath, 
+	return fmt.Sprintf(routes_content,
+		importPath,
 		model,
 		text.Capitalize(model),
 		text.ToSnakeCase(model),
