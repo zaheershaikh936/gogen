@@ -12,7 +12,7 @@ import (
 	"%[1]s/%[2]s/controllers"
 )
 func %[3]sRoutes(router fiber.Router) {
-	%[4]sRouter := router.Group("/%[4]s")	
+	%[4]sRouter := router.Group("/%[5]s")	
 	%[4]sRouter.Get("/", controllers.GetAll%[3]s)
 	%[4]sRouter.Get("/:id", controllers.Get%[3]s)
 	%[4]sRouter.Post("/", controllers.Create%[3]s)
@@ -38,7 +38,8 @@ func RoutesContent(model string, output string, moduleName string) string {
 	return fmt.Sprintf(routes_content,
 		importPath,
 		model,
-		text.Capitalize(model),
-		text.ToSnakeCase(model),
+		text.ToPascalCase(model),
+		text.ToCamelCase(model),
+		text.ToSnakeCase(model), // For URL path
 	)
 }

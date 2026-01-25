@@ -2,44 +2,116 @@ package utils
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/charmbracelet/huh"
+	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 	"github.com/zaheershaikh936/gogen/cmd/utils/helper"
+	"github.com/zaheershaikh936/gogen/cmd/utils/text"
+	"github.com/zaheershaikh936/gogen/cmd/utils/ui"
 )
 
 var Resource = &cobra.Command{
-    Use: "resource",
-    Short: "Generate CRUD resource",
-    Long: "Generates a complete CRUD API resource including controller, service, repository, and routes using the Fiber framework.",
-    Example: "gogen resource [model] --output [output]",
-    Run: func(cmd *cobra.Command, args []string) {
-        model := helper.Pluralize(args[0])
-        output, _ := cmd.Flags().GetString("output")
-        if output == "" { output = "./" }
+	Use:     "resource [model]",
+	Short:   "Generate CRUD resource",
+	Long:    "Generates a complete CRUD API resource including controller, service, repository, and routes using the Fiber framework.",
+	Example: "gogen resource user\ngogen resource",
+	Run: func(cmd *cobra.Command, args []string) {
+		ui.PrintLogo()
 
-        fmt.Println("🚀 Generating CRUD resource...")
-        fmt.Println(model, ":Model")
-        fmt.Println()
+		var model string
+		var output string
 
-        fmt.Println("Files to be generated:")
-        // Create model
-        helper.CreateModel(model, output)
+		output, _ = cmd.Flags().GetString("output")
+		if output == "" {
+			output = "./"
+		}
 
-        // Routes
-        fmt.Printf("  ✓ %s/routes/%s_routes.go\n", model, helper.ToSnakeCase(model))
-        helper.RoutesGenerated(model, output)
+		if len(args) > 0 {
+			model = args[0]
+		} else {
+			// Interactive Wizard
+			form := huh.NewForm(
+				huh.NewGroup(
+					huh.NewInput().
+						Title("What is the model name?").
+						Prompt("? ").
+						Placeholder("e.g. user-order").
+						Value(&model).
+						Validate(func(str string) error {
+							if str == "" {
+								return fmt.Errorf("model name is required")
+							}
+							return nil
+						}),
+				),
+			).WithTheme(huh.ThemeCharm())
 
-        // Controller
-        fmt.Printf("  ✓ %s/controllers/%s_controller.go\n", model, helper.ToSnakeCase(model))
-        helper.ControllerGenerated(model, output)
+			err := form.Run()
+			if err != nil {
+				fmt.Println("Wizard cancelled.")
+				os.Exit(0)
+			}
+		}
 
-        // Service
-        fmt.Printf("  ✓ %s/services/%s_service.go\n", model, helper.ToSnakeCase(model))
-        helper.ServiceGenerated(model, output)
+		// Standardize model name for the generator
+		// We preserve the pluralization for directory structure if that was the original intent
+		// Original code did: model := helper.Pluralize(args[0])
+		model = helper.Pluralize(model)
 
-        // Repository
-        fmt.Printf("  ✓ %s/repositories/%s_repository.go\n", model, helper.ToSnakeCase(model))
-        helper.RepositoryGenerated(model, output)
-    },
-    Args: cobra.ExactArgs(1),
+		// Start Spinner
+		complete := make(chan bool)
+		go ui.ShowSpinner(complete)
+
+		// Create files
+		helper.CreateModel(model, output)
+		ui.ActionDelay()
+
+		helper.RoutesGenerated(model, output)
+		ui.ActionDelay()
+
+		helper.ControllerGenerated(model, output)
+		ui.ActionDelay()
+
+		helper.ServiceGenerated(model, output)
+		ui.ActionDelay()
+
+		helper.RepositoryGenerated(model, output)
+		ui.ActionDelay()
+
+		// Stop Spinner
+		complete <- true
+
+		// Verification Summary
+		header := ui.SuccessStyle.Render("✓ Files generated successfully")
+
+		var lines []string
+
+		// Map paths for the summary
+		snakeName := text.ToSnakeCase(model)
+
+		paths := []string{
+			fmt.Sprintf("%s/routes/%s_routes.go", model, snakeName),
+			fmt.Sprintf("%s/controllers/%s_controller.go", model, snakeName),
+			fmt.Sprintf("%s/services/%s_service.go", model, snakeName),
+			fmt.Sprintf("%s/repositories/%s_repository.go", model, snakeName),
+		}
+
+		for _, p := range paths {
+			lines = append(lines, fmt.Sprintf("%s %s", ui.InfoStyle.Render("↳"), ui.PathStyle.Render(p)))
+		}
+
+		summaryContent := lipgloss.JoinVertical(lipgloss.Left, append([]string{header, ""}, lines...)...)
+
+		fmt.Println(lipgloss.NewStyle().
+			Border(lipgloss.DoubleBorder()).
+			BorderForeground(ui.SuccessColor).
+			Padding(1, 2).
+			MarginLeft(2).
+			Render(summaryContent))
+
+		fmt.Printf("\n  %s Resource %s is ready to use!\n", ui.SuccessStyle.Render("✨"), ui.FileStyle.Render(model))
+	},
+	Args: cobra.MaximumNArgs(1),
 }

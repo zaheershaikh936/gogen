@@ -5,14 +5,9 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
 
-> A powerful CLI tool to generate complete CRUD resources for Go Fiber framework in seconds ⚡
+> A powerful CLI tool to generate complete CRUD resources for Go Fiber framework with a premium TUI experience and idiomatic naming 💎
 
 Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD APIs with models, controllers, services, repositories, and routes—all in one command.
-
-## ✨ Features
-
-- 🎯 **One Command Generation** - Generate complete CRUD structure instantly
-- 📁 **Clean Architecture** - Follows best practices with separated concerns
 
 # gogen
 
@@ -25,6 +20,14 @@ A command-line tool for generating CRUD resource scaffolding for the Go Fiber we
 - Supports custom output directory
 - Minimal dependencies, fast execution
 - Clean, idiomatic Go code structure
+
+## ✨ Premium Experience
+
+- 🪄 **Interactive Wizard** - Guided resource generation by just running `gogen resource`
+- 💎 **Premium TUI** - Beautifully designed terminal interface with borders and boxed reports
+- ⚡ **Real-time Feedback** - Animated spinners and smooth transitions
+- 🎯 **One Command Generation** - Fast, scriptable resource creation
+- 🏗️ **Standardized Naming** - Automatically converts kebab-case (e.g., `user-order`) to idiomatic `PascalCase` and `camelCase`.
 
 ## Installation
 
@@ -117,15 +120,29 @@ internal/api/invoice/
 
 ## Sample CLI Output
 
-```
-🚀 Generating CRUD resource...
-invoice :Model
+```text
+  ╭─────────────────────────────────────────────╮  
+  │                                             │
+  │                  G O G E N                  │
+  │     The professional Go/Fiber generator     │
+  │                                             │
+  ╰─────────────────────────────────────────────╯
 
-Files to be generated:
-  ✓ invoice/routes/invoice_routes.go
-  ✓ invoice/controllers/invoice_controller.go
-  ✓ invoice/services/invoice_service.go
-  ✓ invoice/repositories/invoice_repository.go
+
+ ⣻  Generating your resource...
+
+  ╔══════════════════════════════════════════════╗
+  ║                                              ║
+  ║  ✓ Files generated successfully              ║
+  ║                                              ║
+  ║  ↳ invoice/routes/invoice_routes.go          ║
+  ║  ↳ invoice/controllers/invoice_controller.go ║
+  ║  ↳ invoice/services/invoice_service.go       ║
+  ║  ↳ invoice/repositories/invoice_repository.go║
+  ║                                              ║
+  ╚══════════════════════════════════════════════╝
+
+  ✨ Resource invoice is ready to use!
 ```
 
 ## Generated Architecture
