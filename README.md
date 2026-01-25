@@ -9,14 +9,24 @@
 
 Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD APIs with models, controllers, services, repositories, and routes—all in one command.
 
+# gogen
+
+A command-line tool for generating CRUD resource scaffolding for the Go Fiber web framework. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
+
 ## Features
 
-- 🎯 **One Command Generation** - Generate complete CRUD structure instantly
-- 📁 **Clean Architecture** - Follows best practices with separated concerns
+- Generates complete CRUD resource structure for Go Fiber
+- Produces controller, service, repository, and route files
+- Supports custom output directory
+- Minimal dependencies, fast execution
+- Clean, idiomatic Go code structure
+
+## ✨ Premium Experience
+
 - 🪄 **Interactive Wizard** - Guided resource generation by just running `gogen resource`
 - 💎 **Premium TUI** - Beautifully designed terminal interface with borders and boxed reports
 - ⚡ **Real-time Feedback** - Animated spinners and smooth transitions
-- 🛠️ **Customizable** - Supports custom output directories and minimal dependencies
+- 🎯 **One Command Generation** - Fast, scriptable resource creation
 
 ## Installation
 
