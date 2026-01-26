@@ -2,7 +2,7 @@
 
 [![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white&style=flat-square)](https://go.dev/)
 [![Fiber](https://img.shields.io/badge/Fiber-00A98F?logo=fiber&logoColor=white&style=flat-square)](https://gofiber.io/)
-[![Gin](https://img.shields.io/badge/Gin-00B140?logo=gin&logoColor=white&style=flat-square)](https://gin-gonic.com/)
+[![Gin](https://img.shields.io/badge/Gin-228B22?logo=gin&logoColor=white&style=flat-square)](https://gin-gonic.com/)
 [![Release](https://img.shields.io/github/v/release/zaheershaikh936/gogen?style=flat-square)](https://github.com/zaheershaikh936/gogen/releases)
 [![License](https://img.shields.io/github/license/zaheershaikh936/gogen?style=flat-square)](https://github.com/zaheershaikh936/gogen/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen?style=flat-square)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
