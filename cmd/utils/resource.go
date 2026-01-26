@@ -22,6 +22,7 @@ var Resource = &cobra.Command{
 
 		var model string
 		var output string
+		var framework string
 
 		output, _ = cmd.Flags().GetString("output")
 		if output == "" {
@@ -31,7 +32,7 @@ var Resource = &cobra.Command{
 		if len(args) > 0 {
 			model = args[0]
 		} else {
-			// Interactive Wizard
+			// Interactive Wizard for model name
 			form := huh.NewForm(
 				huh.NewGroup(
 					huh.NewInput().
@@ -55,9 +56,26 @@ var Resource = &cobra.Command{
 			}
 		}
 
+		// Always prompt for framework
+		frameworkForm := huh.NewForm(
+			huh.NewGroup(
+				huh.NewSelect[string]().
+					Title("Pick a framework").
+					Options(
+						huh.NewOption("Fiber", "fiber"),
+						huh.NewOption("Gin", "gin"),
+					).
+					Value(&framework),
+			),
+		).WithTheme(huh.ThemeCharm())
+
+		err := frameworkForm.Run()
+		if err != nil {
+			fmt.Println("Framework selection cancelled.")
+			os.Exit(0)
+		}
+
 		// Standardize model name for the generator
-		// We preserve the pluralization for directory structure if that was the original intent
-		// Original code did: model := helper.Pluralize(args[0])
 		model = helper.Pluralize(model)
 
 		// Start Spinner
@@ -68,16 +86,16 @@ var Resource = &cobra.Command{
 		helper.CreateModel(model, output)
 		ui.ActionDelay()
 
-		helper.RoutesGenerated(model, output)
+		helper.RoutesGenerated(model, output, framework)
 		ui.ActionDelay()
 
-		helper.ControllerGenerated(model, output)
+		helper.ControllerGenerated(model, output, framework)
 		ui.ActionDelay()
 
-		helper.ServiceGenerated(model, output)
+		helper.ServiceGenerated(model, output, framework)
 		ui.ActionDelay()
 
-		helper.RepositoryGenerated(model, output)
+		helper.RepositoryGenerated(model, output, framework)
 		ui.ActionDelay()
 
 		// Stop Spinner
