@@ -5,17 +5,17 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
 
-> A powerful CLI tool to generate complete CRUD resources for Go Fiber framework with a premium TUI experience and idiomatic naming 💎
+> A powerful CLI tool to generate complete CRUD resources for **Go Fiber** and **Gin** frameworks with a premium TUI experience and idiomatic naming 💎
 
 Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD APIs with models, controllers, services, repositories, and routes—all in one command.
 
 # gogen
 
-A command-line tool for generating CRUD resource scaffolding for the Go Fiber web framework. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
+A command-line tool for generating CRUD resource scaffolding for **Go Fiber** and **Gin** web frameworks. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
 
 ## Features
 
-- Generates complete CRUD resource structure for Go Fiber
+- Generates complete CRUD resource structure for **Go Fiber** and **Gin**
 - Produces controller, service, repository, and route files
 - Supports custom output directory
 - Minimal dependencies, fast execution
@@ -23,7 +23,7 @@ A command-line tool for generating CRUD resource scaffolding for the Go Fiber we
 
 ## ✨ Premium Experience
 
-- 🪄 **Interactive Wizard** - Guided resource generation by just running `gogen resource`
+- 🪄 **Interactive Wizard** - Guided resource generation with framework selection by just running `gogen resource`
 - 💎 **Premium TUI** - Beautifully designed terminal interface with borders and boxed reports
 - ⚡ **Real-time Feedback** - Animated spinners and smooth transitions
 - 🎯 **One Command Generation** - Fast, scriptable resource creation
@@ -152,7 +152,7 @@ gogen follows a clean, modular structure:
 - `controllers/`: HTTP handlers for CRUD endpoints
 - `services/`: Business logic layer
 - `repositories/`: Data access layer
-- `routes/`: Fiber route definitions
+- `routes/`: Fiber or Gin route definitions
 
 Each resource is self-contained under its own directory, supporting maintainable and testable code organization.
 
@@ -211,7 +211,7 @@ users/
 ├── repositories/
 │   └── users_repository.go   # Database operations
 └── routes/
-    └── users_routes.go       # Fiber route definitions
+    └── users_routes.go       # Fiber/Gin route definitions
 ```
 
 ## 🏗️ Project Structure

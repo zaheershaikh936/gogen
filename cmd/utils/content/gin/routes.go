@@ -13,7 +13,7 @@ import (
 	"%[1]s/%[2]s/controllers"
 )
 
-func %[3]sRoutes(router *gin.Engine) {
+func %[3]sRoutes(router *gin.RouterGroup) {
 	%[4]sRouter := router.Group("/%[5]s")
 	{
 		%[4]sRouter.GET("/", controllers.GetAll%[3]s)
