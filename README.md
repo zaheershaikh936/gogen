@@ -1,9 +1,12 @@
 # 🚀 Gogen - Go CRUD Generator CLI
 
-[![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)](https://go.dev/)
-[![Release](https://img.shields.io/github/v/release/zaheershaikh936/gogen)](https://github.com/zaheershaikh936/gogen/releases)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
+[![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white&style=flat-square)](https://go.dev/)
+[![Fiber](https://img.shields.io/badge/Fiber-00A98F?logo=fiber&logoColor=white&style=flat-square)](https://gofiber.io/)
+[![Gin](https://img.shields.io/badge/Gin-00B140?logo=gin&logoColor=white&style=flat-square)](https://gin-gonic.com/)
+[![Release](https://img.shields.io/github/v/release/zaheershaikh936/gogen?style=flat-square)](https://github.com/zaheershaikh936/gogen/releases)
+[![License](https://img.shields.io/github/license/zaheershaikh936/gogen?style=flat-square)](https://github.com/zaheershaikh936/gogen/blob/main/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen?style=flat-square)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
+
 
 > A powerful CLI tool to generate complete CRUD resources for **Go Fiber** and **Gin** frameworks with a premium TUI experience and idiomatic naming 💎
 
