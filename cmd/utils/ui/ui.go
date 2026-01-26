@@ -10,7 +10,7 @@ var (
 	// Colors
 	PrimaryColor   = lipgloss.Color("#5f5fff")
 	SecondaryColor = lipgloss.Color("#AE91FF")
-	SuccessColor   = lipgloss.Color("#04B575")
+	SuccessColor   = lipgloss.Color("#10B981")
 	ErrorColor     = lipgloss.Color("#FF4C4C")
 	DimmedColor    = lipgloss.Color("#777777")
 
@@ -28,8 +28,7 @@ var (
 	BoxStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(PrimaryColor).
-			Padding(1, 4).
-			Margin(1, 2)
+			Padding(1, 4)
 
 	SuccessStyle = lipgloss.NewStyle().
 			Foreground(SuccessColor).
@@ -51,11 +50,9 @@ var (
 )
 
 func PrintLogo() {
-	content := lipgloss.JoinVertical(
-		lipgloss.Center,
-		HeaderStyle.Render(Logo),
-		SubtitleStyle.Render(LogoSubtitle),
-	)
+	header := HeaderStyle.Align(lipgloss.Center).Render(Logo)
+	subtitle := SubtitleStyle.Align(lipgloss.Center).Render(LogoSubtitle)
+	content := lipgloss.JoinVertical(lipgloss.Center, header, subtitle)
 	fmt.Println(BoxStyle.Render(content))
 }
 
