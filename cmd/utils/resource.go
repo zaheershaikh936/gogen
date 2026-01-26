@@ -102,16 +102,15 @@ var Resource = &cobra.Command{
 			lines = append(lines, fmt.Sprintf("%s %s", ui.InfoStyle.Render("↳"), ui.PathStyle.Render(p)))
 		}
 
-		summaryContent := lipgloss.JoinVertical(lipgloss.Left, append([]string{header, ""}, lines...)...)
+		summaryContent := lipgloss.JoinVertical(
+			lipgloss.Left,
+			header,
+			lipgloss.JoinVertical(lipgloss.Left, lines...),
+		)
 
-		fmt.Println(lipgloss.NewStyle().
-			Border(lipgloss.DoubleBorder()).
-			BorderForeground(ui.SuccessColor).
-			Padding(1, 2).
-			MarginLeft(2).
-			Render(summaryContent))
+		fmt.Println(summaryContent)
 
-		fmt.Printf("\n  %s Resource %s is ready to use!\n", ui.SuccessStyle.Render("✨"), ui.FileStyle.Render(model))
+		fmt.Printf("\n%s Resource %s is ready to use!\n", ui.SuccessStyle.Render("✨"), ui.FileStyle.Render(model))
 	},
 	Args: cobra.MaximumNArgs(1),
 }
