@@ -47,5 +47,5 @@ func ServiceContent(model string, output string, moduleName string) string {
 			importPath = moduleName + "/" + importPath
 		}
 	}
-	return fmt.Sprintf(service_content, importPath, model, text.Capitalize(model))
+	return fmt.Sprintf(service_content, importPath, model, text.ToPascalCase(model))
 }

@@ -58,11 +58,38 @@ func ToSnakeCase(s string) string {
 	return strings.ToLower(result.String())
 }
 
-func Capitalize(s string) string {
+func ToCamelCase(s string) string {
 	if s == "" {
 		return ""
 	}
-	return strings.ToUpper(s[:1]) + strings.ToLower(s[1:])
+	s = strings.ReplaceAll(s, "-", " ")
+	s = strings.ReplaceAll(s, "_", " ")
+	words := strings.Fields(s)
+	for i := 0; i < len(words); i++ {
+		if i == 0 {
+			words[i] = strings.ToLower(words[i])
+		} else {
+			words[i] = strings.Title(words[i])
+		}
+	}
+	return strings.Join(words, "")
+}
+
+func ToPascalCase(s string) string {
+	if s == "" {
+		return ""
+	}
+	s = strings.ReplaceAll(s, "-", " ")
+	s = strings.ReplaceAll(s, "_", " ")
+	words := strings.Fields(s)
+	for i := 0; i < len(words); i++ {
+		words[i] = strings.Title(words[i])
+	}
+	return strings.Join(words, "")
+}
+
+func Capitalize(s string) string {
+	return ToPascalCase(s)
 }
 
 func TrimTrailingSlash(s string) string {
