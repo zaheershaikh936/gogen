@@ -161,13 +161,22 @@ Each resource is self-contained under its own directory, supporting maintainable
 
 ## Contributing
 
-Contributions are welcome. To contribute:
+We welcome thoughtful contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for detailed information on:
+
+- How to fork and set up the project
+- Coding standards and best practices
+- How to submit pull requests
+- Testing and verification guidelines
+
+**Quick Start:**
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
 3. Commit your changes (`git commit -m 'feat: add new feature'`)
 4. Push to your branch (`git push origin feature/your-feature`)
 5. Open a pull request
+
+For more details, see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
