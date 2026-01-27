@@ -39,11 +39,12 @@ func RoutesContent(model string, output string, moduleName string) string {
 			importPath = moduleName + "/" + importPath
 		}
 	}
-	return fmt.Sprintf(routes_content,
+	content := fmt.Sprintf(routes_content,
 		importPath,
 		model,
 		text.ToPascalCase(model),
 		text.ToCamelCase(model),
 		text.ToSnakeCase(model), // For URL path
 	)
+	return text.PrependHeader(content)
 }

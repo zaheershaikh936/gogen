@@ -47,5 +47,6 @@ func RepositoryContent(model string, output string, moduleName string) string {
 			importPath = moduleName + "/" + importPath
 		}
 	}
-	return fmt.Sprintf(repository_content, importPath, model, text.ToPascalCase(model))
+	content := fmt.Sprintf(repository_content, importPath, model, text.ToPascalCase(model))
+	return text.PrependHeader(content)
 }
