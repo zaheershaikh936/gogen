@@ -48,5 +48,6 @@ func ControllerContent(model string, output string, moduleName string) string {
 			importPath = moduleName + "/" + importPath
 		}
 	}
-	return fmt.Sprintf(controller_content, importPath, model, text.ToPascalCase(model))
+	content := fmt.Sprintf(controller_content, importPath, model, text.ToPascalCase(model))
+	return text.PrependHeader(content)
 }
